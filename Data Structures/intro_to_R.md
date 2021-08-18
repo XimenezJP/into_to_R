@@ -1,7 +1,4 @@
-Introduction to R
-================
-
-## R Programming
+# Data Structures
 
 R is an open source programming language and software environment for
 statistical computing and graphics that is supported by the R Foundation
