@@ -229,3 +229,188 @@ mat[ ,3]
 
 A data frame is being used for storing data tables, the vectors that are
 contained in the form of a list in a data frame are of equal length.
+
+#### Data Transformation
+
+``` r
+#install.packages("nycflights13")
+
+library(tidyverse)
+library(nycflights13)
+
+summary(flights)
+```
+
+    ##       year          month             day           dep_time    sched_dep_time
+    ##  Min.   :2013   Min.   : 1.000   Min.   : 1.00   Min.   :   1   Min.   : 106  
+    ##  1st Qu.:2013   1st Qu.: 4.000   1st Qu.: 8.00   1st Qu.: 907   1st Qu.: 906  
+    ##  Median :2013   Median : 7.000   Median :16.00   Median :1401   Median :1359  
+    ##  Mean   :2013   Mean   : 6.549   Mean   :15.71   Mean   :1349   Mean   :1344  
+    ##  3rd Qu.:2013   3rd Qu.:10.000   3rd Qu.:23.00   3rd Qu.:1744   3rd Qu.:1729  
+    ##  Max.   :2013   Max.   :12.000   Max.   :31.00   Max.   :2400   Max.   :2359  
+    ##                                                  NA's   :8255                 
+    ##    dep_delay          arr_time    sched_arr_time   arr_delay       
+    ##  Min.   : -43.00   Min.   :   1   Min.   :   1   Min.   : -86.000  
+    ##  1st Qu.:  -5.00   1st Qu.:1104   1st Qu.:1124   1st Qu.: -17.000  
+    ##  Median :  -2.00   Median :1535   Median :1556   Median :  -5.000  
+    ##  Mean   :  12.64   Mean   :1502   Mean   :1536   Mean   :   6.895  
+    ##  3rd Qu.:  11.00   3rd Qu.:1940   3rd Qu.:1945   3rd Qu.:  14.000  
+    ##  Max.   :1301.00   Max.   :2400   Max.   :2359   Max.   :1272.000  
+    ##  NA's   :8255      NA's   :8713                  NA's   :9430      
+    ##    carrier              flight       tailnum             origin         
+    ##  Length:336776      Min.   :   1   Length:336776      Length:336776     
+    ##  Class :character   1st Qu.: 553   Class :character   Class :character  
+    ##  Mode  :character   Median :1496   Mode  :character   Mode  :character  
+    ##                     Mean   :1972                                        
+    ##                     3rd Qu.:3465                                        
+    ##                     Max.   :8500                                        
+    ##                                                                         
+    ##      dest              air_time        distance         hour      
+    ##  Length:336776      Min.   : 20.0   Min.   :  17   Min.   : 1.00  
+    ##  Class :character   1st Qu.: 82.0   1st Qu.: 502   1st Qu.: 9.00  
+    ##  Mode  :character   Median :129.0   Median : 872   Median :13.00  
+    ##                     Mean   :150.7   Mean   :1040   Mean   :13.18  
+    ##                     3rd Qu.:192.0   3rd Qu.:1389   3rd Qu.:17.00  
+    ##                     Max.   :695.0   Max.   :4983   Max.   :23.00  
+    ##                     NA's   :9430                                  
+    ##      minute        time_hour                  
+    ##  Min.   : 0.00   Min.   :2013-01-01 05:00:00  
+    ##  1st Qu.: 8.00   1st Qu.:2013-04-04 13:00:00  
+    ##  Median :29.00   Median :2013-07-03 10:00:00  
+    ##  Mean   :26.23   Mean   :2013-07-03 05:22:54  
+    ##  3rd Qu.:44.00   3rd Qu.:2013-10-01 07:00:00  
+    ##  Max.   :59.00   Max.   :2013-12-31 23:00:00  
+    ## 
+
+``` r
+filter(flights, month == 1, day == 1)
+```
+
+    ## # A tibble: 842 x 19
+    ##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+    ##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+    ##  1  2013     1     1      517            515         2      830            819
+    ##  2  2013     1     1      533            529         4      850            830
+    ##  3  2013     1     1      542            540         2      923            850
+    ##  4  2013     1     1      544            545        -1     1004           1022
+    ##  5  2013     1     1      554            600        -6      812            837
+    ##  6  2013     1     1      554            558        -4      740            728
+    ##  7  2013     1     1      555            600        -5      913            854
+    ##  8  2013     1     1      557            600        -3      709            723
+    ##  9  2013     1     1      557            600        -3      838            846
+    ## 10  2013     1     1      558            600        -2      753            745
+    ## # … with 832 more rows, and 11 more variables: arr_delay <dbl>, carrier <chr>,
+    ## #   flight <int>, tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>,
+    ## #   distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
+
+``` r
+select(flights, year:day)
+```
+
+    ## # A tibble: 336,776 x 3
+    ##     year month   day
+    ##    <int> <int> <int>
+    ##  1  2013     1     1
+    ##  2  2013     1     1
+    ##  3  2013     1     1
+    ##  4  2013     1     1
+    ##  5  2013     1     1
+    ##  6  2013     1     1
+    ##  7  2013     1     1
+    ##  8  2013     1     1
+    ##  9  2013     1     1
+    ## 10  2013     1     1
+    ## # … with 336,766 more rows
+
+``` r
+select(flights, -c(year:day))
+```
+
+    ## # A tibble: 336,776 x 16
+    ##    dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier
+    ##       <int>          <int>     <dbl>    <int>          <int>     <dbl> <chr>  
+    ##  1      517            515         2      830            819        11 UA     
+    ##  2      533            529         4      850            830        20 UA     
+    ##  3      542            540         2      923            850        33 AA     
+    ##  4      544            545        -1     1004           1022       -18 B6     
+    ##  5      554            600        -6      812            837       -25 DL     
+    ##  6      554            558        -4      740            728        12 UA     
+    ##  7      555            600        -5      913            854        19 B6     
+    ##  8      557            600        -3      709            723       -14 EV     
+    ##  9      557            600        -3      838            846        -8 B6     
+    ## 10      558            600        -2      753            745         8 AA     
+    ## # … with 336,766 more rows, and 9 more variables: flight <int>, tailnum <chr>,
+    ## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
+    ## #   minute <dbl>, time_hour <dttm>
+
+``` r
+rename(flights, tail_num = tailnum)
+```
+
+    ## # A tibble: 336,776 x 19
+    ##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+    ##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+    ##  1  2013     1     1      517            515         2      830            819
+    ##  2  2013     1     1      533            529         4      850            830
+    ##  3  2013     1     1      542            540         2      923            850
+    ##  4  2013     1     1      544            545        -1     1004           1022
+    ##  5  2013     1     1      554            600        -6      812            837
+    ##  6  2013     1     1      554            558        -4      740            728
+    ##  7  2013     1     1      555            600        -5      913            854
+    ##  8  2013     1     1      557            600        -3      709            723
+    ##  9  2013     1     1      557            600        -3      838            846
+    ## 10  2013     1     1      558            600        -2      753            745
+    ## # … with 336,766 more rows, and 11 more variables: arr_delay <dbl>,
+    ## #   carrier <chr>, flight <int>, tail_num <chr>, origin <chr>, dest <chr>,
+    ## #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
+
+``` r
+transmute(flights,
+  gain = dep_delay - arr_delay,
+  hours = air_time / 60,
+  gain_per_hour = gain / hours
+)
+```
+
+    ## # A tibble: 336,776 x 3
+    ##     gain hours gain_per_hour
+    ##    <dbl> <dbl>         <dbl>
+    ##  1    -9 3.78          -2.38
+    ##  2   -16 3.78          -4.23
+    ##  3   -31 2.67         -11.6 
+    ##  4    17 3.05           5.57
+    ##  5    19 1.93           9.83
+    ##  6   -16 2.5           -6.4 
+    ##  7   -24 2.63          -9.11
+    ##  8    11 0.883         12.5 
+    ##  9     5 2.33           2.14
+    ## 10   -10 2.3           -4.35
+    ## # … with 336,766 more rows
+
+``` r
+delays <- flights %>% 
+  group_by(dest) %>% 
+  summarise(
+    count = n(),
+    dist = mean(distance, na.rm = TRUE),
+    delay = mean(arr_delay, na.rm = TRUE)
+  ) %>% 
+  filter(count > 20, dest != "HNL")
+delays
+```
+
+    ## # A tibble: 96 x 4
+    ##    dest  count  dist delay
+    ##    <chr> <int> <dbl> <dbl>
+    ##  1 ABQ     254 1826   4.38
+    ##  2 ACK     265  199   4.85
+    ##  3 ALB     439  143  14.4 
+    ##  4 ATL   17215  757. 11.3 
+    ##  5 AUS    2439 1514.  6.02
+    ##  6 AVL     275  584.  8.00
+    ##  7 BDL     443  116   7.05
+    ##  8 BGR     375  378   8.03
+    ##  9 BHM     297  866. 16.9 
+    ## 10 BNA    6333  758. 11.8 
+    ## # … with 86 more rows
+
