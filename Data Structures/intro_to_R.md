@@ -301,26 +301,7 @@ filter(flights, month == 1, day == 1)
     ## #   distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
 
 ``` r
-select(flights, year:day)
-```
-
-    ## # A tibble: 336,776 x 3
-    ##     year month   day
-    ##    <int> <int> <int>
-    ##  1  2013     1     1
-    ##  2  2013     1     1
-    ##  3  2013     1     1
-    ##  4  2013     1     1
-    ##  5  2013     1     1
-    ##  6  2013     1     1
-    ##  7  2013     1     1
-    ##  8  2013     1     1
-    ##  9  2013     1     1
-    ## 10  2013     1     1
-    ## # … with 336,766 more rows
-
-``` r
-select(flights, -c(year:day))
+select(flights, -c(year))
 ```
 
     ## # A tibble: 336,776 x 16
@@ -362,11 +343,10 @@ rename(flights, tail_num = tailnum)
     ## #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
 
 ``` r
-transmute(flights,
+mutate(flights,
   gain = dep_delay - arr_delay,
   hours = air_time / 60,
-  gain_per_hour = gain / hours
-)
+  gain_per_hour = gain / hours)
 ```
 
     ## # A tibble: 336,776 x 3
@@ -383,31 +363,3 @@ transmute(flights,
     ##  9     5 2.33           2.14
     ## 10   -10 2.3           -4.35
     ## # … with 336,766 more rows
-
-``` r
-delays <- flights %>% 
-  group_by(dest) %>% 
-  summarise(
-    count = n(),
-    dist = mean(distance, na.rm = TRUE),
-    delay = mean(arr_delay, na.rm = TRUE)
-  ) %>% 
-  filter(count > 20, dest != "HNL")
-delays
-```
-
-    ## # A tibble: 96 x 4
-    ##    dest  count  dist delay
-    ##    <chr> <int> <dbl> <dbl>
-    ##  1 ABQ     254 1826   4.38
-    ##  2 ACK     265  199   4.85
-    ##  3 ALB     439  143  14.4 
-    ##  4 ATL   17215  757. 11.3 
-    ##  5 AUS    2439 1514.  6.02
-    ##  6 AVL     275  584.  8.00
-    ##  7 BDL     443  116   7.05
-    ##  8 BGR     375  378   8.03
-    ##  9 BHM     297  866. 16.9 
-    ## 10 BNA    6333  758. 11.8 
-    ## # … with 86 more rows
-
