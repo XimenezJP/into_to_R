@@ -28,7 +28,7 @@ boxplot
 
 ggsave("boxplot.pdf", width = 25, height = 25, units="cm", dpi = 300)
 ```
-![Boxplot](https://raw.githubusercontent.com/XimenezJP/into_to_R/master/Data%20Visualization/boxplot.pdf)<!-- -->
+![Boxplot](https://raw.githubusercontent.com/XimenezJP/into_to_R/main/Data%20Visualization/boxplot.png)<!-- -->
 
 ## Histogram
 ``` r
