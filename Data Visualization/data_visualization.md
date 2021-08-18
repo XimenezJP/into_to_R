@@ -41,8 +41,9 @@ histogram
 
 ggsave("histogram.pdf", width = 25, height = 25, units="cm", dpi = 300)
 ``` 
+![Histogram](https://raw.githubusercontent.com/XimenezJP/into_to_R/main/Data%20Visualization/histogram.png)<!-- -->
 
-## Density
+## Density Plot
 ``` r
 density <- ggplot(airquality, aes(x = Ozone, fill = Month)) +
   geom_density(position = "stack", alpha = 0.6) +
@@ -57,3 +58,4 @@ density
 
 ggsave("density.pdf", width = 25, height = 25, units="cm", dpi = 300)
 ```
+![Density Plot](https://raw.githubusercontent.com/XimenezJP/into_to_R/main/Data%20Visualization/density.png)<!-- -->
