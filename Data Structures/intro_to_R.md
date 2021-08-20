@@ -227,139 +227,215 @@ mat[ ,3]
 A data frame is being used for storing data tables, the vectors that are
 contained in the form of a list in a data frame are of equal length.
 
-#### Data Transformation
-
 ``` r
-#install.packages("nycflights13")
-
+#install.packages("tidyverse")
+```
+``` r
 library(tidyverse)
-library(nycflights13)
-
-summary(flights)
+```
+``` r
+data(starwars)
+starwars
 ```
 
-    ##       year          month             day           dep_time    sched_dep_time
-    ##  Min.   :2013   Min.   : 1.000   Min.   : 1.00   Min.   :   1   Min.   : 106  
-    ##  1st Qu.:2013   1st Qu.: 4.000   1st Qu.: 8.00   1st Qu.: 907   1st Qu.: 906  
-    ##  Median :2013   Median : 7.000   Median :16.00   Median :1401   Median :1359  
-    ##  Mean   :2013   Mean   : 6.549   Mean   :15.71   Mean   :1349   Mean   :1344  
-    ##  3rd Qu.:2013   3rd Qu.:10.000   3rd Qu.:23.00   3rd Qu.:1744   3rd Qu.:1729  
-    ##  Max.   :2013   Max.   :12.000   Max.   :31.00   Max.   :2400   Max.   :2359  
-    ##                                                  NA's   :8255                 
-    ##    dep_delay          arr_time    sched_arr_time   arr_delay       
-    ##  Min.   : -43.00   Min.   :   1   Min.   :   1   Min.   : -86.000  
-    ##  1st Qu.:  -5.00   1st Qu.:1104   1st Qu.:1124   1st Qu.: -17.000  
-    ##  Median :  -2.00   Median :1535   Median :1556   Median :  -5.000  
-    ##  Mean   :  12.64   Mean   :1502   Mean   :1536   Mean   :   6.895  
-    ##  3rd Qu.:  11.00   3rd Qu.:1940   3rd Qu.:1945   3rd Qu.:  14.000  
-    ##  Max.   :1301.00   Max.   :2400   Max.   :2359   Max.   :1272.000  
-    ##  NA's   :8255      NA's   :8713                  NA's   :9430      
-    ##    carrier              flight       tailnum             origin         
-    ##  Length:336776      Min.   :   1   Length:336776      Length:336776     
-    ##  Class :character   1st Qu.: 553   Class :character   Class :character  
-    ##  Mode  :character   Median :1496   Mode  :character   Mode  :character  
-    ##                     Mean   :1972                                        
-    ##                     3rd Qu.:3465                                        
-    ##                     Max.   :8500                                        
-    ##                                                                         
-    ##      dest              air_time        distance         hour      
-    ##  Length:336776      Min.   : 20.0   Min.   :  17   Min.   : 1.00  
-    ##  Class :character   1st Qu.: 82.0   1st Qu.: 502   1st Qu.: 9.00  
-    ##  Mode  :character   Median :129.0   Median : 872   Median :13.00  
-    ##                     Mean   :150.7   Mean   :1040   Mean   :13.18  
-    ##                     3rd Qu.:192.0   3rd Qu.:1389   3rd Qu.:17.00  
-    ##                     Max.   :695.0   Max.   :4983   Max.   :23.00  
-    ##                     NA's   :9430                                  
-    ##      minute        time_hour                  
-    ##  Min.   : 0.00   Min.   :2013-01-01 05:00:00  
-    ##  1st Qu.: 8.00   1st Qu.:2013-04-04 13:00:00  
-    ##  Median :29.00   Median :2013-07-03 10:00:00  
-    ##  Mean   :26.23   Mean   :2013-07-03 05:22:54  
-    ##  3rd Qu.:44.00   3rd Qu.:2013-10-01 07:00:00  
-    ##  Max.   :59.00   Max.   :2013-12-31 23:00:00  
-    ## 
+    # A tibble: 87 x 14
+    name               height  mass hair_color    skin_color  eye_color birth_year sex    gender    homeworld species films     vehicles  starships
+    <chr>               <int> <dbl> <chr>         <chr>       <chr>          <dbl> <chr>  <chr>     <chr>     <chr>   <list>    <list>    <list>   
+    1 Luke Skywalker        172    77 blond         fair        blue            19   male   masculine Tatooine  Human   <chr [5]> <chr [2]> <chr [2]>
+    2 C-3PO                 167    75 NA            gold        yellow         112   none   masculine Tatooine  Droid   <chr [6]> <chr [0]> <chr [0]>
+    3 R2-D2                  96    32 NA            white, blue red             33   none   masculine Naboo     Droid   <chr [7]> <chr [0]> <chr [0]>
+    4 Darth Vader           202   136 none          white       yellow          41.9 male   masculine Tatooine  Human   <chr [4]> <chr [0]> <chr [1]>
+    5 Leia Organa           150    49 brown         light       brown           19   female feminine  Alderaan  Human   <chr [5]> <chr [1]> <chr [0]>
+    6 Owen Lars             178   120 brown, grey   light       blue            52   male   masculine Tatooine  Human   <chr [3]> <chr [0]> <chr [0]>
+    7 Beru Whitesun lars    165    75 brown         light       blue            47   female feminine  Tatooine  Human   <chr [3]> <chr [0]> <chr [0]>
+    8 R5-D4                  97    32 NA            white, red  red             NA   none   masculine Tatooine  Droid   <chr [1]> <chr [0]> <chr [0]>
+    9 Biggs Darklighter     183    84 black         light       brown           24   male   masculine Tatooine  Human   <chr [1]> <chr [0]> <chr [1]>
+    10 Obi-Wan Kenobi       182    77 auburn, white fair        blue-gray       57   male   masculine Stewjon   Human   <chr [6]> <chr [1]> <chr [5]>
+
+#### Filter rows with `filter()`
+
+`filter()` allows you to select a subset of rows in a data frame. Like all single verbs, the first argument is the tibble (or data frame). The second and subsequent arguments refer to variables within that data frame, selecting rows where the expression is `TRUE`.
+
+For example, we can select all character with light skin color and brown eyes with:
+
+```{r}
+starwars %>% filter(skin_color == "light", eye_color == "brown")
+```
+    ## A tibble: 7 x 14
+    name              height  mass hair_color skin_color eye_color birth_year sex    gender    homeworld species films     vehicles  starships
+     <chr>              <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr>  <chr>     <chr>     <chr>   <list>    <list>    <list>   
+    1 Leia Organa          150    49 brown      light      brown             19 female feminine  Alderaan  Human   <chr [5]> <chr [1]> <chr [0]>
+    2 Biggs Darklighter    183    84 black      light      brown             24 male   masculine Tatooine  Human   <chr [1]> <chr [0]> <chr [1]>
+    3 Cordé                157    NA brown      light      brown             NA female feminine  Naboo     Human   <chr [1]> <chr [0]> <chr [0]>
+    4 Dormé                165    NA brown      light      brown             NA female feminine  Naboo     Human   <chr [1]> <chr [0]> <chr [0]>
+    5 Raymus Antilles      188    79 brown      light      brown             NA male   masculine Alderaan  Human   <chr [2]> <chr [0]> <chr [0]>
+    6 Poe Dameron           NA    NA brown      light      brown             NA male   masculine NA        Human   <chr [1]> <chr [0]> <chr [1]>
+    7 Padmé Amidala        165    45 brown      light      brown             46 female feminine  Naboo     Human   <chr [3]> <chr [0]> <chr [3]>
+
+This is roughly equivalent to this base R code:
+
+```{r, eval = FALSE}
+starwars[starwars$skin_color == "light" & starwars$eye_color == "brown", ]
+```
+We can also select a Jedi Hunter:
+
+``` r 
+starwars %>% filter(homeworld == "Dathomir")
+```
+    # A tibble: 1 x 14
+    name       height  mass hair_color skin_color eye_color birth_year sex   gender    homeworld species films     vehicles  starships
+    <chr>       <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr> <chr>     <chr>     <chr>   <list>    <list>    <list>   
+    1 Darth Maul    175    80 none       red        yellow            54 male  masculine Dathomir  Zabrak  <chr [1]> <chr [1]> <chr [1]>
+
+#### Arrange rows with `arrange()`
+
+`arrange()` works similarly to `filter()` except that instead of filtering or selecting rows, it reorders them. It takes a data frame, and a set of column names (or more complicated expressions) to order by. If you provide more than one column name, each additional column will be used to break ties in the values of preceding columns:
 
 ``` r
-filter(flights, month == 1, day == 1)
+starwars %>% arrange(height, mass)
 ```
+    # A tibble: 87 x 14
+    name                  height  mass hair_color skin_color  eye_color birth_year sex   gender    homeworld   species        films     vehicles  starships
+    <chr>                  <int> <dbl> <chr>      <chr>       <chr>          <dbl> <chr> <chr>     <chr>       <chr>          <list>    <list>    <list>   
+    1 Yoda                      66    17 white      green       brown            896 male  masculine NA          Yoda's species <chr [5]> <chr [0]> <chr [0]>
+    2 Ratts Tyerell             79    15 none       grey, blue  unknown           NA male  masculine Aleen Minor Aleena         <chr [1]> <chr [0]> <chr [0]>
+    3 Wicket Systri Warrick     88    20 brown      brown       brown              8 male  masculine Endor       Ewok           <chr [1]> <chr [0]> <chr [0]>
+    4 Dud Bolt                  94    45 none       blue, grey  yellow            NA male  masculine Vulpter     Vulptereen     <chr [1]> <chr [0]> <chr [0]>
+    5 R2-D2                     96    32 NA         white, blue red               33 none  masculine Naboo       Droid          <chr [7]> <chr [0]> <chr [0]>
+    6 R4-P17                    96    NA none       silver, red red, blue         NA none  feminine  NA          Droid          <chr [2]> <chr [0]> <chr [0]>
+    7 R5-D4                     97    32 NA         white, red  red               NA none  masculine Tatooine    Droid          <chr [1]> <chr [0]> <chr [0]>
+    8 Sebulba                  112    40 none       grey, red   orange            NA male  masculine Malastare   Dug            <chr [1]> <chr [0]> <chr [0]>
+    9 Gasgano                  122    NA none       white, blue black             NA male  masculine Troiken     Xexto          <chr [1]> <chr [0]> <chr [0]>
+    10 Watto                   137    NA black      blue, grey  yellow            NA male  masculine Toydaria    Toydarian      <chr [2]> <chr [0]> <chr [0]>
 
-    ## # A tibble: 842 x 19
-    ##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
-    ##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
-    ##  1  2013     1     1      517            515         2      830            819
-    ##  2  2013     1     1      533            529         4      850            830
-    ##  3  2013     1     1      542            540         2      923            850
-    ##  4  2013     1     1      544            545        -1     1004           1022
-    ##  5  2013     1     1      554            600        -6      812            837
-    ##  6  2013     1     1      554            558        -4      740            728
-    ##  7  2013     1     1      555            600        -5      913            854
-    ##  8  2013     1     1      557            600        -3      709            723
-    ##  9  2013     1     1      557            600        -3      838            846
-    ## 10  2013     1     1      558            600        -2      753            745
-    ## # … with 832 more rows, and 11 more variables: arr_delay <dbl>, carrier <chr>,
-    ## #   flight <int>, tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>,
-    ## #   distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
+Use `desc()` to order a column in descending order:
 
 ``` r
-select(flights, -c(year))
+starwars %>% arrange(desc(mass))
 ```
+    # A tibble: 87 x 14
+    name              height  mass hair_color  skin_color      eye_color    birth_year sex          gender    homeworld species   films   vehicles starships
+    <chr>              <int> <dbl> <chr>       <chr>           <chr>             <dbl> <chr>        <chr>     <chr>     <chr>     <list>  <list>   <list>   
+    1 Jabba Desilijic …    175  1358 NA          green-tan, bro… orange            600   hermaphrodi… masculine Nal Hutta Hutt      <chr [… <chr [0… <chr [0]>
+    2 Grievous             216   159 none        brown, white    green, yell…       NA   male         masculine Kalee     Kaleesh   <chr [… <chr [1… <chr [1]>
+    3 IG-88                200   140 none        metal           red                15   none         masculine NA        Droid     <chr [… <chr [0… <chr [0]>
+    4 Darth Vader          202   136 none        white           yellow             41.9 male         masculine Tatooine  Human     <chr [… <chr [0… <chr [1]>
+    5 Tarfful              234   136 brown       brown           blue               NA   male         masculine Kashyyyk  Wookiee   <chr [… <chr [0… <chr [0]>
+    6 Owen Lars            178   120 brown, grey light           blue               52   male         masculine Tatooine  Human     <chr [… <chr [0… <chr [0]>
+    7 Bossk                190   113 none        green           red                53   male         masculine Trandosha Trandosh… <chr [… <chr [0… <chr [0]>
+    8 Chewbacca            228   112 brown       unknown         blue              200   male         masculine Kashyyyk  Wookiee   <chr [… <chr [1… <chr [2]>
+    9 Jek Tono Porkins     180   110 brown       fair            blue               NA   male         masculine Bestine … Human     <chr [… <chr [0… <chr [1]>
+    10 Dexter Jettster     198   102 none        brown           yellow             NA   male         masculine Ojom      Besalisk  <chr [… <chr [0… <chr [0]>
 
-    ## # A tibble: 336,776 x 16
-    ##    dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier
-    ##       <int>          <int>     <dbl>    <int>          <int>     <dbl> <chr>  
-    ##  1      517            515         2      830            819        11 UA     
-    ##  2      533            529         4      850            830        20 UA     
-    ##  3      542            540         2      923            850        33 AA     
-    ##  4      544            545        -1     1004           1022       -18 B6     
-    ##  5      554            600        -6      812            837       -25 DL     
-    ##  6      554            558        -4      740            728        12 UA     
-    ##  7      555            600        -5      913            854        19 B6     
-    ##  8      557            600        -3      709            723       -14 EV     
-    ##  9      557            600        -3      838            846        -8 B6     
-    ## 10      558            600        -2      753            745         8 AA     
-    ## # … with 336,766 more rows, and 9 more variables: flight <int>, tailnum <chr>,
-    ## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
-    ## #   minute <dbl>, time_hour <dttm>
+#### Select columns with `select()`
+
+Often you work with large datasets with many columns but only a few are actually of interest to you. `select()` allows you to rapidly zoom in on a useful subset using operations that usually only work on numeric variable positions:
 
 ``` r
-rename(flights, tail_num = tailnum)
+# Select columns by name
+starwars %>% select(name, height, mass)
 ```
+    # A tibble: 87 x 3
+    name               height  mass
+    <chr>               <int> <dbl>
+    1 Luke Skywalker        172    77
+    2 C-3PO                 167    75
+    3 R2-D2                  96    32
+    4 Darth Vader           202   136
+    5 Leia Organa           150    49
+    6 Owen Lars             178   120
+    7 Beru Whitesun lars    165    75
+    8 R5-D4                  97    32
+    9 Biggs Darklighter     183    84
+    10 Obi-Wan Kenobi       182    77
 
-    ## # A tibble: 336,776 x 19
-    ##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
-    ##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
-    ##  1  2013     1     1      517            515         2      830            819
-    ##  2  2013     1     1      533            529         4      850            830
-    ##  3  2013     1     1      542            540         2      923            850
-    ##  4  2013     1     1      544            545        -1     1004           1022
-    ##  5  2013     1     1      554            600        -6      812            837
-    ##  6  2013     1     1      554            558        -4      740            728
-    ##  7  2013     1     1      555            600        -5      913            854
-    ##  8  2013     1     1      557            600        -3      709            723
-    ##  9  2013     1     1      557            600        -3      838            846
-    ## 10  2013     1     1      558            600        -2      753            745
-    ## # … with 336,766 more rows, and 11 more variables: arr_delay <dbl>,
-    ## #   carrier <chr>, flight <int>, tail_num <chr>, origin <chr>, dest <chr>,
-    ## #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
+#### Rename columns with `rename()`
+
+You can rename variables with `rename()` by using named arguments:
 
 ``` r
-mutate(flights,
-  gain = dep_delay - arr_delay,
-  hours = air_time / 60,
-  gain_per_hour = gain / hours)
+starwars %>% select(home_world = homeworld)
+```
+    # A tibble: 87 x 14
+    name               height  mass hair_color    skin_color  eye_color birth_year sex    gender    home_world species films     vehicles  starships
+    <chr>               <int> <dbl> <chr>         <chr>       <chr>          <dbl> <chr>  <chr>     <chr>      <chr>   <list>    <list>    <list>   
+    1 Luke Skywalker        172    77 blond         fair        blue            19   male   masculine Tatooine   Human   <chr [5]> <chr [2]> <chr [2]>
+    2 C-3PO                 167    75 NA            gold        yellow         112   none   masculine Tatooine   Droid   <chr [6]> <chr [0]> <chr [0]>
+    3 R2-D2                  96    32 NA            white, blue red             33   none   masculine Naboo      Droid   <chr [7]> <chr [0]> <chr [0]>
+    4 Darth Vader           202   136 none          white       yellow          41.9 male   masculine Tatooine   Human   <chr [4]> <chr [0]> <chr [1]>
+    5 Leia Organa           150    49 brown         light       brown           19   female feminine  Alderaan   Human   <chr [5]> <chr [1]> <chr [0]>
+    6 Owen Lars             178   120 brown, grey   light       blue            52   male   masculine Tatooine   Human   <chr [3]> <chr [0]> <chr [0]>
+    7 Beru Whitesun lars    165    75 brown         light       blue            47   female feminine  Tatooine   Human   <chr [3]> <chr [0]> <chr [0]>
+    8 R5-D4                  97    32 NA            white, red  red             NA   none   masculine Tatooine   Droid   <chr [1]> <chr [0]> <chr [0]>
+    9 Biggs Darklighter     183    84 black         light       brown           24   male   masculine Tatooine   Human   <chr [1]> <chr [0]> <chr [1]>
+    10 Obi-Wan Kenobi       182    77 auburn, white fair        blue-gray       57   male   masculine Stewjon    Human   <chr [6]> <chr [1]> <chr [5]>
+
+#### Add new columns with `mutate()`
+
+Besides selecting sets of existing columns, it's often useful to add new columns that are functions of existing columns. This is the job of `mutate()`:
+
+``` r
+starwars %>% mutate(height_m = height / 100)
 ```
 
-    ## # A tibble: 336,776 x 3
-    ##     gain hours gain_per_hour
-    ##    <dbl> <dbl>         <dbl>
-    ##  1    -9 3.78          -2.38
-    ##  2   -16 3.78          -4.23
-    ##  3   -31 2.67         -11.6 
-    ##  4    17 3.05           5.57
-    ##  5    19 1.93           9.83
-    ##  6   -16 2.5           -6.4 
-    ##  7   -24 2.63          -9.11
-    ##  8    11 0.883         12.5 
-    ##  9     5 2.33           2.14
-    ## 10   -10 2.3           -4.35
-    ## # … with 336,766 more rows
+We can't see the height in meters we just calculated, but we can fix that using a select command.
+
+``` r
+starwars %>%
+  mutate(height_m = height / 100) %>%
+  select(name, height_m, height, everything())
+```
+    # A tibble: 87 x 15
+    name               height_m height  mass hair_color    skin_color  eye_color birth_year sex    gender    homeworld species films     vehicles  starships
+    <chr>                 <dbl>  <int> <dbl> <chr>         <chr>       <chr>          <dbl> <chr>  <chr>     <chr>     <chr>   <list>    <list>    <list>   
+    1 Luke Skywalker         1.72    172    77 blond         fair        blue            19   male   masculine Tatooine  Human   <chr [5]> <chr [2]> <chr [2]>
+    2 C-3PO                  1.67    167    75 NA            gold        yellow         112   none   masculine Tatooine  Droid   <chr [6]> <chr [0]> <chr [0]>
+    3 R2-D2                  0.96     96    32 NA            white, blue red             33   none   masculine Naboo     Droid   <chr [7]> <chr [0]> <chr [0]>
+    4 Darth Vader            2.02    202   136 none          white       yellow          41.9 male   masculine Tatooine  Human   <chr [4]> <chr [0]> <chr [1]>
+    5 Leia Organa            1.5     150    49 brown         light       brown           19   female feminine  Alderaan  Human   <chr [5]> <chr [1]> <chr [0]>
+    6 Owen Lars              1.78    178   120 brown, grey   light       blue            52   male   masculine Tatooine  Human   <chr [3]> <chr [0]> <chr [0]>
+    7 Beru Whitesun lars     1.65    165    75 brown         light       blue            47   female feminine  Tatooine  Human   <chr [3]> <chr [0]> <chr [0]>
+    8 R5-D4                  0.97     97    32 NA            white, red  red             NA   none   masculine Tatooine  Droid   <chr [1]> <chr [0]> <chr [0]>
+    9 Biggs Darklighter      1.83    183    84 black         light       brown           24   male   masculine Tatooine  Human   <chr [1]> <chr [0]> <chr [1]>
+    10 Obi-Wan Kenobi        1.82    182    77 auburn, white fair        blue-gray       57   male   masculine Stewjon   Human   <chr [6]> <chr [1]> <chr [5]>
+
+#### Summarise values with `summarise()`
+
+The last verb is `summarise()`. It collapses a data frame to a single row.
+
+``` r
+starwars %>% summarise(height = mean(height, na.rm = TRUE))
+```
+
+It's not that useful until we learn the `group_by()` verb below.
+
+``` r
+starwars %>%
+  group_by(species, sex) %>%
+  select(height, mass) %>%
+  summarise(
+    height = mean(height, na.rm = TRUE),
+    mass = mean(mass, na.rm = TRUE))
+```
+
+#### Save and Open Dataframe
+
+We will create a new dataframe. 
+
+``` r
+starwars_df <- starwars %>%
+  mutate(height_m = height / 100,
+         BMI = mass / (height_m^2)) %>%
+  select(name, BMI, height_m, everything(), -c(films, vehicles, starships)) 
+``` 
+Now let’s try saving this data set as a csv to our computer. We will do this using the `write_csv` function. This function has two main arguments: `x` and `path`. The `x` argument is the data set that you want to save, which in this case is the `starwars_df` data set that we just saved to our environment. The `path` argument is the file path where you want to save the file. The end of the `path` argument is the name that you want to use for the file.
+
+``` r
+write_csv(starwars_df, file = "starwars_df.csv")
+```
+
+Now let’s practice with `read_csv` by reading this file back into R. The `read_csv` has one main argument: file. The file argument is the file path to the file that you are wanting to read into R.
+
+``` r
+df_full <- read_csv("starwars_df.csv")
+```
