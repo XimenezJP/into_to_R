@@ -131,13 +131,6 @@ seq(0, 10, 2)
 
     ## [1]  0  2  4  6  8 10
 
-``` r
-directions <- c("North", "North", "West", "South")
-class(directions)
-```
-
-    ## [1] "character"
-
 ### Matriz
 
 A matrix in R is a two-dimensional rectangular data set and thus it can
