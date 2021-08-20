@@ -81,6 +81,8 @@ class(TRUE)
 3 > 4
 ```
 
+    ## [1] FALSE
+
 ### Factors
 
 In order to categorise the categorical variables and store it on
