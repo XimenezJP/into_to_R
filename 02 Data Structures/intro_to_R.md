@@ -17,7 +17,7 @@ workspace management. This tutorial was adapted from **Sydney Informatics Hub's*
 getwd()
 ```
 
-    ## [1] "/Users/joaopaulo/Dropbox/João Paulo/R script/Introduction_to_R"
+    ## [1] "/Users/joaopaulo/Documents/Codes/R Scripts/VEME_2021"
 
 ## Calculating things in R
 
@@ -44,10 +44,10 @@ sqrt(4)
 There are several different types of data you can use in R. We’ll
 examine a few common ones in a little more detail.
 
-### Text
+### Character
 
-Strings are known as “character” in R. Use the double quotes `"` or
-single quotes `'` to wrap around the string
+Strings are known as “character” in R. Use the double quotes `"` 
+to wrap around the string
 
 ``` r
 myname <- "João"
@@ -62,42 +62,15 @@ class(myname)
     ## [1] "character"
 
 ### Numbers
-
-Numbers have different classes. The most common two are `integer` and
-`numeric`. Integers are whole numbers:
-
 ``` r
-favourite.integer <- as.integer(8)
-print(favourite.integer)
-```
-
-    ## [1] 8
-
-``` r
-class(favourite.integer)
-```
-
-    ## [1] "integer"
-
-Numbers can be `numeric` which are decimals:
-
-``` r
-favourite.numeric <- as.numeric(8.8)
-print(favourite.numeric)
-```
-
-    ## [1] 8.8
-
-``` r
-class(favourite.numeric)
+1 + 1
+3000000
+class(0.00001)
 ```
 
     ## [1] "numeric"
 
 ### Logical (True/False)
-
-We use the `==` to test for equality in R
-
 ``` r
 class(TRUE)
 ```
@@ -105,16 +78,8 @@ class(TRUE)
     ## [1] "logical"
 
 ``` r
-favourite.numeric == 8.8
+3 > 4
 ```
-
-    ## [1] TRUE
-
-``` r
-favourite.numeric == 9.9
-```
-
-    ## [1] FALSE
 
 ### Factors
 
@@ -141,18 +106,6 @@ nlevels(directions)
 ```
 
     ## [1] 3
-
-A factor can be ordered. This makes sense in the context of a ranking
-such as a survey response, e.g. from ‘Strongly agree’ to ‘Strong
-disagree’.
-
-``` r
-myorderedfactor <- factor(directions, levels = c("South", "West", "North"), ordered = TRUE)
-
-levels(myorderedfactor)
-```
-
-    ## [1] "South" "West"  "North"
 
 ### Vectors
 
