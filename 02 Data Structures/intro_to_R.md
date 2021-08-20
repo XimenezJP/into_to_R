@@ -287,6 +287,8 @@ starwars %>% filter(homeworld == "Dathomir")
     <chr>       <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr> <chr>     <chr>     <chr>   <list>    <list>    <list>   
     1 Darth Maul    175    80 none       red        yellow            54 male  masculine Dathomir  Zabrak  <chr [1]> <chr [1]> <chr [1]>
 
+![Darth Maul](https://raw.githubusercontent.com/XimenezJP/into_to_R/main/02%20Data%20Structures/darth_maul.png)<!-- -->
+
 #### Arrange rows with `arrange()`
 
 `arrange()` works similarly to `filter()` except that instead of filtering or selecting rows, it reorders them. It takes a data frame, and a set of column names (or more complicated expressions) to order by. If you provide more than one column name, each additional column will be used to break ties in the values of preceding columns:
