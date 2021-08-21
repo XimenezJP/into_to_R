@@ -28,7 +28,7 @@ boxplot
 
 ggsave("boxplot.pdf", width = 25, height = 25, units="cm", dpi = 300)
 ```
-![Boxplot](https://raw.githubusercontent.com/XimenezJP/into_to_R/main/Data%20Visualization/boxplot.png)<!-- -->
+![Boxplot](https://raw.githubusercontent.com/XimenezJP/into_to_R/main/03%20Data%20Visualization/boxplot.png)<!-- -->
 
 ## Histogram
 ``` r
@@ -41,7 +41,7 @@ histogram
 
 ggsave("histogram.pdf", width = 25, height = 25, units="cm", dpi = 300)
 ``` 
-![Histogram](https://raw.githubusercontent.com/XimenezJP/into_to_R/main/Data%20Visualization/histogram.png)<!-- -->
+![Histogram](https://raw.githubusercontent.com/XimenezJP/into_to_R/main/03%20Data%20Visualization/histogram.png)<!-- -->
 
 ## Density Plot
 ``` r
@@ -58,4 +58,4 @@ density
 
 ggsave("density.pdf", width = 25, height = 25, units="cm", dpi = 300)
 ```
-![Density Plot](https://raw.githubusercontent.com/XimenezJP/into_to_R/main/Data%20Visualization/density.png)<!-- -->
+![Density Plot](https://raw.githubusercontent.com/XimenezJP/into_to_R/main/03%20Data%20Visualization/density.png)<!-- -->
