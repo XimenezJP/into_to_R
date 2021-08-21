@@ -20,6 +20,7 @@ ggplot(data = [dataset], mapping = aes(x = [x-variable], y = [y-variable])) +
    geom_xxx() +
    other options
 ```
+For help with the ggplot2, see https://ggplot2.tidyverse.org
 
 ## Prerequisites
 ``` r
