@@ -83,6 +83,29 @@ class(TRUE)
 
     ## [1] FALSE
 
+### Vectors
+
+We can create 1D data structures called vectors. A vector is a sequence of data elements of the same basic type. 
+Here is a vector containing numeric values
+``` r
+1:10
+```
+
+    ##  [1]  1  2  3  4  5  6  7  8  9 10
+
+``` r
+seq(0, 10, 2)
+```
+
+    ## [1]  0  2  4  6  8 10
+    
+A vector can contain character strings.
+``` r
+directions <- c("North", "North", "West", "South")
+class(directions)
+``` 
+    ## [1] "character"
+
 ### Factors
 
 In order to categorise the categorical variables and store it on
@@ -108,28 +131,6 @@ nlevels(directions)
 ```
 
     ## [1] 3
-
-### Vectors
-
-We can create 1D data structures called “vectors”.
-
-``` r
-1:10
-```
-
-    ##  [1]  1  2  3  4  5  6  7  8  9 10
-
-``` r
-2*(1:10)
-```
-
-    ##  [1]  2  4  6  8 10 12 14 16 18 20
-
-``` r
-seq(0, 10, 2)
-```
-
-    ## [1]  0  2  4  6  8 10
 
 ### Matriz
 
