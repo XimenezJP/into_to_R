@@ -85,3 +85,5 @@ This heart scatterplot was made in `R` using the `ggplot2` and `animation` packa
   <img src="https://raw.githubusercontent.com/XimenezJP/into_to_R/main/03%20Data%20Visualization/valentine.gif">
 </p>
 
+The code for this is [available here](https://cdn2.hubspot.net/hub/355318/file-2490959249-r/heart_graph.r), in an R file. 
+Let us know if you use it for anything cool!
