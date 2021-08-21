@@ -237,7 +237,7 @@ starwars %>% filter(homeworld == "Dathomir")
     1 Darth Maul    175    80 none       red        yellow            54 male  masculine Dathomir  Zabrak  <chr [1]> <chr [1]> <chr [1]>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/XimenezJP/into_to_R/main/02%20Data%20Structures/darth_maul.png">
+  <img src="https://raw.githubusercontent.com/XimenezJP/into_to_R/main/02%20Data%20Structures/figures/darth_maul.png" width="400" height="500">
 </p>
 
 #### Arrange rows with `arrange()`
@@ -403,4 +403,4 @@ There are many tools for visualizing data (R is one of them), and many approache
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   geom_point()
 ``` 
-![Jabba](https://raw.githubusercontent.com/XimenezJP/into_to_R/main/02%20Data%20Structures/jabba.png)<!-- -->
+![Jabba](https://raw.githubusercontent.com/XimenezJP/into_to_R/main/02%20Data%20Structures/figures/jabba.png)<!-- -->
