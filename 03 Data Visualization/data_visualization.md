@@ -76,3 +76,12 @@ density
 ggsave("density.pdf", width = 25, height = 25, units="cm", dpi = 300)
 ```
 ![Density Plot](https://raw.githubusercontent.com/XimenezJP/into_to_R/main/03%20Data%20Visualization/density.png)<!-- -->
+
+# Love
+Love, true love, is why we’re here today. This is how the people at `VEME2021` show our love – **with statistical graphs**. 
+This heart scatterplot was made in `R` using the `ggplot2` and `animation` packages
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/XimenezJP/into_to_R/main/03%20Data%20Visualization/valentine.gif">
+</p>
+
