@@ -390,3 +390,15 @@ Now let’s practice with `read_csv` by reading this file back into R. The `read
 ``` r
 df_full <- read_csv("starwars_df.csv")
 ```
+
+### Data visualization
+"The simple graph has brought more information to the data analyst’s mind than any other device." — **John Tukey**
+Data visualization is the creation and study of the visual representation of data. 
+There are many tools for visualizing data (R is one of them), and many approaches/systems within R for making data visualizations.
+`ggplot2` is the one we will use
+
+``` r
+ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
+  geom_point()
+``` 
+![Jabba](https://raw.githubusercontent.com/XimenezJP/into_to_R/main/02%20Data%20Structures/jabba.png)<!-- -->
