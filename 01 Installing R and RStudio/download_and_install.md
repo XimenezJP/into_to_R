@@ -14,7 +14,7 @@ Instead, R is a computer language, like C, C++, or UNIX. You use R by writing co
 In the old days, people ran R code in a UNIX terminal window—as if they were hackers in a movie from the 1980s. 
 Now almost everyone uses R with an application called RStudio.
 
-![R](https://raw.githubusercontent.com/XimenezJP/into_to_R/main/01%20Installing%20R%20and%20RStudio/R.png)<!-- -->
+![R](https://raw.githubusercontent.com/XimenezJP/into_to_R/main/01%20Installing%20R%20and%20RStudio/figures/R.png)<!-- -->
 
 ## RStudio
 RStudio is an application like Microsoft Word—except that instead of helping you write in English, RStudio helps you write in R. 
@@ -31,7 +31,7 @@ Everything else you see is unique to RStudio.
 Hidden in the other panes are a text editor, a graphics window, a debugger, a file manager, and much more. 
 You’ll learn about these panes as they become useful throughout the course of this book.
 
-![RStudio](https://raw.githubusercontent.com/XimenezJP/into_to_R/main/01%20Installing%20R%20and%20RStudio/RStudio.png)<!-- -->
+![RStudio](https://raw.githubusercontent.com/XimenezJP/into_to_R/main/01%20Installing%20R%20and%20RStudio/figures/RStudio.png)<!-- -->
 
 ## R Packages
 Many of R’s most useful functions do not come preloaded when you start R, but reside in packages that can be installed on top of R.
