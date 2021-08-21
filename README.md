@@ -8,3 +8,5 @@ This is one day hands on workshop designed for people who are brand new to R & R
 These materials were based on Introduction to R (2014), and https://github.com/rstudio/master-the-tidyverse (2017). They are intended to be appropriate for people who have never used R before.
 
 To download the materials, click on "Clone or download" and select "Download ZIP"
+
+Requests for additional materials can be made via email to the authors: [Joao Paulo Ximenez](joaopaulo.ximenez@me.com) or [Rafael Bezerra](rafaelbezerra@usp.br).
