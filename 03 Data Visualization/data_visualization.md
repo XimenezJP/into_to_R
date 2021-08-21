@@ -1,8 +1,25 @@
 # Data Visualization
 
 In this tutorial we will demonstrate some of the many options the
-**ggplot2** package has for creating and customising graphs. We will use
+`ggplot2` package has for creating and customising graphs. We will use
 R’s airquality dataset in the datasets package. This tutorial was adapted from **The Hitchhiker's Guide to Ggplot2**.
+
+## Hello ggplot2
+
+`ggplot2` is tidyverse's data visualization package. The gg in `ggplot2` stands for Grammar of Graphics.
+It is inspired by the book Grammar of Graphics by **Leland Wilkinson**. A grammar of graphics is a tool 
+that enables us to concisely describe the components of a graphic 
+
+![tidyverse](https://raw.githubusercontent.com/XimenezJP/into_to_R/main/03%20Data%20Visualization/tidyverse.png)<!-- -->
+
+`ggplot()` is the main function in `ggplot2` and plots are constructed in layers. 
+The structure of the code for plots can often be summarized as
+
+``` r
+ggplot(data = [dataset], mapping = aes(x = [x-variable], y = [y-variable])) +
+   geom_xxx() +
+   other options
+```
 
 ## Prerequisites
 ``` r
