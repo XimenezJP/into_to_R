@@ -78,6 +78,26 @@ ggsave("density.pdf", width = 25, height = 25, units="cm", dpi = 300)
 ```
 ![Density Plot](https://raw.githubusercontent.com/XimenezJP/into_to_R/main/03%20Data%20Visualization/density.png)<!-- -->
 
+## Scatterplot
+``` r
+scatterplot <- ggplot(airquality, aes(x = Day, y = Ozone, size = Wind, fill = Month)) + 
+  geom_point(shape = 21) +
+  scale_x_continuous(breaks = seq(1, 31, 5)) + 
+  scale_size(range = c(1, 10)) +
+  theme_bw() +
+  theme(legend.position = "bottom", legend.direction = "horizontal",
+        legend.box = "vertical",
+        legend.key.size = unit(0.5, "cm")) +
+  labs(title = "Air Quality in New York by Day",
+       subtitle = "Source: New York State Department of Conservation",
+       x = "Day of the month", y = "Ozone (ppb)",
+       size = "Wind Speed (mph) ", fill = "Months ")
+scatterplot
+
+ggsave("scatterplot.pdf", width = 25, height = 25, units="cm", dpi = 300)
+```
+![Scatterplot](https://raw.githubusercontent.com/XimenezJP/into_to_R/main/03%20Data%20Visualization/scatterplot.png)<!-- -->
+
 # Love
 Love, true love, is why we’re here today. This is how the people at `VEME2021` show our love – **with statistical graphs**. 
 This heart scatterplot was made in `R` using the `ggplot2` and `animation` packages
