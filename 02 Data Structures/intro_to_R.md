@@ -236,7 +236,9 @@ starwars %>% filter(homeworld == "Dathomir")
     <chr>       <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr> <chr>     <chr>     <chr>   <list>    <list>    <list>   
     1 Darth Maul    175    80 none       red        yellow            54 male  masculine Dathomir  Zabrak  <chr [1]> <chr [1]> <chr [1]>
 
-![Darth Maul](https://raw.githubusercontent.com/XimenezJP/into_to_R/main/02%20Data%20Structures/darth_maul.png)<!-- -->
+<p align="center">
+  <img src="https://raw.githubusercontent.com/XimenezJP/into_to_R/main/02%20Data%20Structures/darth_maul.png">
+</p>
 
 #### Arrange rows with `arrange()`
 
