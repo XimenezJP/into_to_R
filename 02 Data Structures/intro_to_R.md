@@ -307,7 +307,7 @@ starwars %>% select(name, height, mass)
 You can rename variables with `rename()` by using named arguments:
 
 ``` r
-starwars %>% select(home_world = homeworld)
+starwars %>% rename(home_world = homeworld)
 ```
     # A tibble: 87 x 14
     name               height  mass hair_color    skin_color  eye_color birth_year sex    gender    home_world species films     vehicles  starships
